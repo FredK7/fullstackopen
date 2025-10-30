@@ -1,59 +1,43 @@
-const Header = (props) => {
-  return <h1>{props.course}</h1>
-}
-const Content = (props) =>{
-  const part1 = props.part1
-  const part2 = props.part2
-  const part3 = props.part3
-  const exercises1 = props.exercises1
-  const exercises2 = props.exercises2
-  const exercises3 = props.exercises3
-  const Part = (props) =>{
-    return(
-      <>
-        <p>
-          {props.part} {props.exercises}
-        </p>
-      </>
-    )
-  }
-  return(
-    <>
-      <Part part = {part1} exercises ={exercises1}/>
-      <Part part = {part2} exercises = {exercises2}/>
-      <Part part = {part3} exercises = {exercises3}/>
-      
-    </>
+import {useState} from 'react'
+
+const Display = (props) => {
+  return (
+    <div>{props.counter}</div>
   )
 }
-
-const Total = (props) => {
+const Button = (props) =>{
   return(
-    <p>
-      Number of exercises {props.exercises1+props.exercises2+props.exercises3}
-    </p>
+    <button onClick={props.onClick}>{props.text}</button>
   )
 }
-
 
 const App = () => {
-  const course = 'Half Stack application development'
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
 
+  const [counter, setCounter] = useState(0)
+  console.log('rendering with counter value', counter)
+
+  const increaseByOne = () => {
+    setCounter(counter + 1)
+    console.log('increasing, value before', counter)
+  }
+  const decreaseByOne = () => {
+    setCounter(counter - 1)
+    console.log('decreasing, value before', counter)
+  }
+  const setToZero = () => {
+    setCounter(0)
+    console.log('resetting to zero, value before', counter)
+  }
   return (
     <>
-      <Content course ={course}/>
-      <Content part1 = {part1} exercises1={exercises1}/>
-      <Content part1 = {part2} exercises1={exercises2}/>
-      <Content part1 = {part3} exercises1={exercises3}/>
-      <Total exercises1={exercises1} exercises2 ={exercises2} exercises3={exercises3}/>
+    <Display counter = {counter}/>
+    <Button onClick = {increaseByOne} text="Increase"/>
+    <Button onClick={setToZero} text="Zero"/> 
+    <Button onClick={decreaseByOne} text="Decrease"/>
     </>
   )
 }
 
+
 export default App
+
